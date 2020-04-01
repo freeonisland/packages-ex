@@ -1,0 +1,26 @@
+{
+    "name": "cyril/packages",
+    "description": "Essai sur differents packages, micro-frameworks et extensions php",
+    "minimum-stability": "stable",
+    "type": "project",
+    "authors": [
+        {
+            "name": "freeonisland",
+            "email": "freeonisland@yahoo.fr"
+        }
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "require": {
+        "bcosca/fatfree": "^3.7",
+        "laravel/lumen-framework": "^7.0",
+        "league/oauth2-client": "^2.4",
+        "league/oauth2-server": "^8.0",
+        "mikecao/flight": "^1.3",
+        "slim/slim": "^4.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5"
+    }
+}
