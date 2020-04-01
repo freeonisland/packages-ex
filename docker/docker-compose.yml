@@ -4,8 +4,8 @@ services:
         image: nginx
         #working_dir: /usr/share/nginx/html
         volumes:
-        - /WEBSERVER/web/src:/usr/share/nginx/html
-        - /WEBSERVER/web/conf/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+        - /WEBSERVER/packages/src:/usr/share/nginx/html
+        - /WEBSERVER/packages/docker/conf/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
         ports:
         - "80:80"
         networks:
@@ -17,7 +17,7 @@ services:
         ports: 
         - 9000:9000
         volumes:
-        - /WEBSERVER/web/src:/usr/share/nginx/html
+        - /WEBSERVER/packages/src:/usr/share/nginx/html
         networks:
         - web
     
