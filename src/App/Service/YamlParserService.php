@@ -7,14 +7,14 @@ use Symfony\Component\Yaml\Exception\ParseException;
 
 class YamlParserService
 {
-    public function parse(string $file): string
+    public function parse(string $file): array
     {
         try {
             $value = Yaml::parseFile($file);
             return $value;
         } catch (ParseException $exception) {
             printf('Unable to parse the YAML string: %s', $exception->getMessage());
-            return '';
+            return [];
         }
         //$value = Yaml::parseFile('/path/to/file.yaml');
         //echo Yaml::dump($array, 1);

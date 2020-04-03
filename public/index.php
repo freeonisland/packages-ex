@@ -5,27 +5,11 @@ error_reporting(E_ALL);
 
 require '../vendor/autoload.php';
 
-/**
- * Namespace
- * Controllers
- * @controllers @id:[0-9]{3}
- * @actions
- * @params
- * $route->params; $route->regex; $route->splat;
- */
-Flight::route('/(@ns(/@ctrl(/@action(/@params:.*))))', function($ns, $ctrl, $action, $params){
-        // Array of HTTP methods matched against
-        $ns = $ns?ucfirst(strtolower(filter_var($ns,FILTER_SANITIZE_URL))):'';
-        $c = $ctrl?ucfirst(strtolower(filter_var($ctrl,FILTER_SANITIZE_URL))).'Controller':'IndexController';
-        $a = $action?strtolower(filter_var($action,FILTER_SANITIZE_URL)).'Action':'indexAction';
-        $p = $params?explode('/',strtolower(filter_var($params,FILTER_SANITIZE_URL))):[];
-        
-        $class=$ns.'\\Controller\\'.$c;
-        (new $class)->$a(...$p);
-}, true);
+define ('APP_ROOT', realpath(__DIR__.'/../'));
+
+App\Core\App::run();
 
 
-Flight::start();
 
 /*
 url - The URL being requested

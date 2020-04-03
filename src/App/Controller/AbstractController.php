@@ -12,12 +12,7 @@ class AbstractController
      */
     protected $container;
 
-    public function __construct(ContainerManager $container)
-    {
-        $this->container = $container;
-    }
-
-    public function getParam(string $name): string
+    public function __construct()
     {
         
     }
