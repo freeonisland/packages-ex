@@ -4,15 +4,8 @@ namespace Oauth\Controller;
 
 class IndexController
 {
-    function __construct()
+    public function indexAction()
     {
-
-    }
-
-    function microAction($name='e', $pignon='r')
-    {
-        s('hello');
-        s($name);
-        s($pignon);
+        
     }
 }

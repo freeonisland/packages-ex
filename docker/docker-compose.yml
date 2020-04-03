@@ -4,22 +4,71 @@ services:
         image: nginx
         #working_dir: /usr/share/nginx/html
         volumes:
-        - /WEBSERVER/packages:/usr/share/nginx/html
-        - /WEBSERVER/packages/docker/conf/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+            - /WEBSERVER/packages:/usr/share/nginx/html
+            - /WEBSERVER/packages/docker/conf/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
         ports:
-        - "80:80"
+            - "80:80"
         networks:
-        - web
+            - web
           
     phpfpm: 
-        image: php:fpm 
+        build: ./conf/fpm
         #working_dir: /usr/share/nginx/html
         ports: 
-        - 9000:9000
+            - 9000:9000
         volumes:
-        - /WEBSERVER/packages:/usr/share/nginx/html
+            - /WEBSERVER/packages:/usr/share/nginx/html
         networks:
-        - web
+            - web
+        # command: /bin/bash -c "apt-get update && \
+        #     apt-get install -y libldap2-dev && \
+        #     rm -rf /var/lib/apt/lists/* && \
+        #     docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
+        #     docker-php-ext-install ldap" && php-fpm
+    
+    php-oauth-s:
+        image: php:fpm
+        #working_dir: /usr/share/nginx/html
+        ports: 
+            - 9008:9000
+        volumes:
+            - /WEBSERVER/packages:/usr/share/nginx/html
+        networks:
+            - web
+    
+    mariadb: 
+        image: mariadb
+        ports: 
+            - 3306:3306
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: example
+        # volumes: 
+        #     - /WEBSERVER/packages/data:/var/lib/mysql
+        networks: 
+            - web
+    
+    # adminer:
+    #     image: adminer
+    #     restart: always
+    #     ports:
+    #         - 8080:8080
+    
+    docker-ldap:
+        image: osixia/openldap
+        ports:
+            - 389:389
+            - 636:636
+        environment:
+            LDAP_ORGANISATION="My Company"
+            LDAP_DOMAIN="my-company.com"
+            LDAP_ADMIN_PASSWORD="JonSn0w"
+
+        # LDAP_BASE_DN
+        # {{ LDAP_BACKEND }}
+        # {{ LDAP_DOMAIN }}
+        # {{ LDAP_READONLY_USER_USERNAME }}
+        # {{ LDAP_READONLY_USER_PASSWORD_ENCRYPTED }
     
 networks:
     web:
