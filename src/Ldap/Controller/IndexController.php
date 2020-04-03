@@ -11,7 +11,7 @@ class IndexController extends AbstractController
      */
     public function indexAction()
     {
-        //$this->getParam('LDAP_SERVER');
+        $this->getParam('LDAP_SERVER');
 
         $ldap_conn = ldap_connect('ldap://docker-ldap');
         

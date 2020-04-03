@@ -3,24 +3,41 @@
 namespace App\Manager;
 
 use App\Service\YamlParserService;
+use App\Core\Container;
 
-class ConfigManager
+class ConfigManager extends Container
 {
-    private $filepath;
+    /**
+     * const
+     */
+    const NAME_CONTAINER = 'CONFIG';
+
+    /**
+     * vars
+     */
     private $yamlParser;
 
+    /**
+     * Constructor
+     */
     public function __construct(YamlParserService $yamlParser)
     {
         $this->yamlParser = $yamlParser;
     }
 
-    public function setFilepath(string $filepath): void
+    public function loadFilepath(string $filepath): void
     {
-        $this->filepath = $filepath;
-    }
+        $values = $this->yamlParser->parse($filepath);
 
-    public function getConfig(): array
-    {
-        return $this->yamlParser->parse($this->filepath);
+        if(!is_array($values)) {
+            throw new \Exception('Returned Yaml parsed value is not an array');
+            return;
+        }
+
+        array_walk($values, function($v, $k){
+            $this->set($k, $v);
+        });
+
+        s($this);
     }
 }

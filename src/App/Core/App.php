@@ -28,23 +28,23 @@ class App
             $c  = $ctrl ? ucfirst(strtolower(filter_var($ctrl, FILTER_SANITIZE_URL))) . 'Controller' : self::CONTROLLER_DEFAULT;
             $a  = $action ? strtolower(filter_var($action, FILTER_SANITIZE_URL)) . 'Action' : self::ACTION_DEFAULT;
             $p  = $params ? explode('/', strtolower(filter_var($params,FILTER_SANITIZE_URL))) : [];
+
+            //Container
+            $container = new Container;
         
             // Config
             $config_file = APP_ROOT . "/src/{$ns}/Resources/config-" . strtolower($ns) . ".yml";
             if (file_exists($config_file)) {
-                $config = new ConfigManager( new YamlParserService );
-                $config->setFilepath($config_file);
-                $config = $config->getConfig();
+                $configManager = new ConfigManager(new YamlParserService);
+                $configManager->loadFilepath($config_file);
+                $container->set(ConfigManager::NAME_CONTAINER, $configManager);
             }
 
             //Class controller
             $class_ctrl = $ns . '\\Controller\\' . $c;
-            $controller = new $class_ctrl;
-
-            //Container
-            
-
+            $controller = new $class_ctrl($container);
             $controller->$a(...$p);
+
         }, true);
 
         Flight::start();
