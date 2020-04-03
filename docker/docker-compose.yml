@@ -26,15 +26,15 @@ services:
         #     docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
         #     docker-php-ext-install ldap" && php-fpm
     
-    php-oauth-s:
-        image: php:fpm
-        #working_dir: /usr/share/nginx/html
-        ports: 
-            - 9008:9000
-        volumes:
-            - /WEBSERVER/packages:/usr/share/nginx/html
-        networks:
-            - web
+    # php-oauth-s:
+    #     image: php:fpm
+    #     #working_dir: /usr/share/nginx/html
+    #     ports: 
+    #         - 9008:9000
+    #     volumes:
+    #         - /WEBSERVER/packages:/usr/share/nginx/html
+    #     networks:
+    #         - web
     
     mariadb: 
         image: mariadb
@@ -60,9 +60,11 @@ services:
             - 389:389
             - 636:636
         environment:
-            LDAP_ORGANISATION="My Company"
-            LDAP_DOMAIN="my-company.com"
-            LDAP_ADMIN_PASSWORD="JonSn0w"
+            LDAP_ORGANISATION: "My Company"
+            LDAP_DOMAIN: "my-company.com"
+            LDAP_ADMIN_PASSWORD: "JonSn0w"
+        networks:
+            - web
 
         # LDAP_BASE_DN
         # {{ LDAP_BACKEND }}

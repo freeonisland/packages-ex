@@ -1,0 +1,3 @@
+LDAP_SERVER: docker-ldap
+LDAP_DN: cn=admin,dc=my-company,dc=com
+LDAP_PASSWORD: JonSn0w
