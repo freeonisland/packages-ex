@@ -1,3 +1,4 @@
 LDAP_SERVER: ldap-server
 LDAP_DN: cn=admin,dc=my-company,dc=com
+LDAP_DOMAIN: my-company.com
 LDAP_PASSWORD: JonSn0w
