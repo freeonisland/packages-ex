@@ -1,1 +1,65 @@
 ldapsearch -x -H ldap://localhost -b dc=example,dc=org -D "cn=admin,dc=example,dc=org" -w admin
+
+-PACKAGES-
+composer require adldap2/adldap2 directorytree/ldaprecord laminas/laminas-ldap
+
+-FCT-
+ldap_8859_to_t61 — Convertit les caractères 8859 en caractères t61
+ldap_add_ext — Add entries to LDAP directory
+ldap_add — Ajoute une entrée dans un dossier LDAP
+ldap_bind_ext — Bind to LDAP directory
+ldap_bind — Authentification au serveur LDAP
+ldap_close — Alias de ldap_unbind
+ldap_compare — Compare une entrée avec des valeurs d'attributs
+ldap_connect — Connexion à un serveur LDAP
+ldap_control_paged_result_response — Récupère le cookie de pagination LDAP
+ldap_control_paged_result — Envoi un contrôle de pagination LDAP
+ldap_count_entries — Compte le nombre d'entrées après une recherche
+ldap_delete_ext — Delete an entry from a directory
+ldap_delete — Efface une entrée dans un dossier
+ldap_dn2ufn — Convertit un DN en format UFN (User Friendly Naming)
+ldap_err2str — Convertit un numéro d'erreur LDAP en message d'erreur
+ldap_errno — Retourne le numéro d'erreur LDAP de la dernière commande exécutée
+ldap_error — Retourne le message LDAP de la dernière commande LDAP
+ldap_escape — Échappe une chaîne pour l'utiliser dans un filtre LDAP ou un DN
+ldap_exop_passwd — PASSWD extended operation helper
+ldap_exop_refresh — Refresh extended operation helper
+ldap_exop_whoami — WHOAMI extended operation helper
+ldap_exop — Performs an extended operation
+ldap_explode_dn — Sépare les différents composants d'un DN
+ldap_first_attribute — Retourne le premier attribut
+ldap_first_entry — Retourne la première entrée
+ldap_first_reference — Retourne la première référence
+ldap_free_result — Libère la mémoire du résultat
+ldap_get_attributes — Lit les attributs d'une entrée
+ldap_get_dn — Lit le DN d'une entrée
+ldap_get_entries — Lit toutes les entrées du résultat
+ldap_get_option — Lit/écrit la valeur courante d'une option
+ldap_get_values_len — Lit toutes les valeurs binaires d'une entrée
+ldap_get_values — Lit toutes les valeurs d'une entrée LDAP
+ldap_list — Recherche dans un niveau
+ldap_mod_add_ext — Add attribute values to current attributes
+ldap_mod_add — Ajoute un attribut à l'entrée courante
+ldap_mod_del_ext — Delete attribute values from current attributes
+ldap_mod_del — Efface un attribut à l'entrée courante
+ldap_mod_replace_ext — Replace attribute values with new ones
+ldap_mod_replace — Remplace un attribut dans l'entrée courante
+ldap_modify_batch — Mets en lot des modifications et les exécute sur une entrée LDAP
+ldap_modify — Alias de ldap_mod_replace
+ldap_next_attribute — Lit l'attribut suivant
+ldap_next_entry — Lit la prochaine entrée
+ldap_next_reference — Lit la référence suivante
+ldap_parse_exop — Parse result object from an LDAP extended operation
+ldap_parse_reference — Extrait les informations d'une référence d'entrée
+ldap_parse_result — Extrait des informations d'un résultat
+ldap_read — Lit une entrée
+ldap_rename_ext — Modify the name of an entry
+ldap_rename — Modifie le nom d'une entrée
+ldap_sasl_bind — Authentification au serveur LDAP en utilisant SASL
+ldap_search — Recherche sur le serveur LDAP
+ldap_set_option — Modifie la valeur d'une option LDAP
+ldap_set_rebind_proc — Configure une fonction de retour pour refaire des liaisons lors de recherche de référants
+ldap_sort — Trie les entrées d'un résultat LDAP côté client
+ldap_start_tls — Démarre TLS
+ldap_t61_to_8859 — Convertit les caractères t61 en caractères 8859
+ldap_unbind — Déconnecte d'un serveur LDAP

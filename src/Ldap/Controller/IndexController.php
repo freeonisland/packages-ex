@@ -11,18 +11,17 @@ class IndexController extends AbstractController
      */
     public function indexAction()
     {
-        $this->getParam('LDAP_SERVER');
-
-        $ldap_conn = ldap_connect('ldap://docker-ldap');
-        
-        $ldap_dn = "cn=admin,dc=my-company,dc=com";
-        $ldap_pass = "JonSn0w";
+        $ldap_conn = ldap_connect('ldap://' . $this->getParam('LDAP_SERVER'));
+        $ldap_dn = $this->getParam('LDAP_DN');
+        $ldap_pass = $this->getParam('LDAP_PASSWORD');
 
         try {
             if ($d=ldap_bind_ext($ldap_conn, $ldap_dn, $ldap_pass, [['oid' => LDAP_CONTROL_PASSWORDPOLICYREQUEST]] )) {
+                echo 'LDAP connected';
                 s($d);
-                echo 'Ldap connected';
+            } else {
+                echo "Can't connect to LDAP";
             }
-        } catch(\Exception $e) { echo "EXCEPTION: ".$e->getMessage(); }
+        } catch(\ErrorException $e) { echo "LDAP EXCEPTION: ".$e->getMessage(); }
     }
 }

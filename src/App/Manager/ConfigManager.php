@@ -37,7 +37,5 @@ class ConfigManager extends Container
         array_walk($values, function($v, $k){
             $this->set($k, $v);
         });
-
-        s($this);
     }
 }
