@@ -1,7 +1,11 @@
+LDAP.COM
 ldapsearch -x -H ldap://localhost -b dc=example,dc=org -D "cn=admin,dc=example,dc=org" -w admin
 
 -PACKAGES-
 composer require adldap2/adldap2 directorytree/ldaprecord laminas/laminas-ldap
+
+-TRY-
+GLauth
 
 -FCT-
 ldap_8859_to_t61 — Convertit les caractères 8859 en caractères t61
