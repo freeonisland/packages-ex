@@ -6,7 +6,7 @@ use Laminas\Ldap\Ldap;
 
 class LaminasManager extends AbstractLdapManager implements LdapManagerInterface
 {
-    /*
+    /*  
      * $options = [
         'host'              => 's0.foo.net',
         'username'          => 'CN=user1,DC=foo,DC=net',

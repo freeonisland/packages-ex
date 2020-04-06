@@ -45,7 +45,7 @@ services:
     #     ports:
     #         - 8080:8080
     
-    openldap:
+    ldap-server:
         image: osixia/openldap
         container_name: ldap-server
         ports:
@@ -65,10 +65,20 @@ services:
     ldap-admin: 
         image: osixia/phpldapadmin
         container_name: ldap-admin
-    
-    minio:
-        image: minio/minio
-        container_name: minio
+        #login: cn=admin,dc=my-company,dc=com
         ports:
-            - 9999:9000
+            - 6443:443
+        environment:
+            PHPLDAPADMIN_LDAP_HOSTS: ldap-server
+        #PHPLDAP_IP=$(docker inspect -f "{{ .NetworkSettings.IPAddress }}" phpldapadmin-service)
+    
+    # minio:
+    #     image: minio/minio
+    #     container_name: minio
+    #     ports:
+    #         - 9999:9000
+    
+    #client
+    #minio-mc:
+    #    image: minio/mc
     

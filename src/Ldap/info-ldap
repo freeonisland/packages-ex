@@ -1,11 +1,140 @@
 LDAP.COM
 ldapsearch -x -H ldap://localhost -b dc=example,dc=org -D "cn=admin,dc=example,dc=org" -w admin
 
--PACKAGES-
-composer require adldap2/adldap2 directorytree/ldaprecord laminas/laminas-ldap
-
 -TRY-
 GLauth
+
+-PACKAGES-
+adldap2/adldap2 
+directorytree/ldaprecord 
+laminas/laminas-ldap
+
+OID: http://www.iana.org
+
+-login-
+cn=admin,dc=my-company,dc=com
+password
+ex: userPassword: {MD5} Xr4il0zQ4PC0q3aQ0qbuaQ==
+
+SSL (Secure Socket Layer, ou TLS - Transport Layer Security)
+LADPS (LDAP over SSL) communique par défaut sur le port 636
+StartTLS utilise le port 389 par défaut
+SASL (Simple Authentication and Security Layer)
+ACL: slapd.conf
+
+-COMPOSITION-
+DC Domain Component
+OU Organisational Units
+CN Common Name / UID User Identifiant
+->DN Distinguished Name with Relative RDN
+entry with attributs
+
+    DN (Distinguished Name -chemin complet et nom) : uid=Jean-Christian Ranu,ou=users,dc=cogip,dc=fr
+    RDN (Relative Distinguished Name, -juste nom) : uid=Jean-Christian Ranu
+
+-SCOPE de l'action-
+sub: recursive
+one: fils directs
+base: base spécifiée
+
+-FILTER-
+equal:=   approx~=    >=    <=    and:     or|     not!    *
+
+ldap[s]://<hostname>:<port>/<base_dn>?<attributes>?<scope>?&<filter>?<extensions>
+ldap://localhost:389/ou=users,dc=cogip,dc=fr?uid?sub
+ldap://localhost:389/ou=vente,dc=cogip,dc=fr?cn,tel,mail?scope=sub?(objetclass=person">
+ldap://localhost:389/ou=ventes,o=Netscape,c=US?cn,tel,mail?scope=sub?(objetclass=person)
+
+-OPERATION-
+Abandon:Abandonne l'opération précédemment envoyées au serveur
+Add:Ajoute une entrée au répertoire
+Bind:Initie une nouvelle session sur le serveur LDAP
+Compare:Compare les entrées d'un répertoire selon des critères
+Delete:Supprime une entrée d'un répertoire
+Extended:Effectue des opérations étendues
+Modify:Modifie une entrée
+Modify DN:Déplace ou renomme une entrée
+Rename:Modifie le nom d'une entrée
+Search:Recherche des entrées d'un répertoire
+Unbind:Termine une session sur le serveur LDAP
+
+-MODELE-
+    Le modèle de nommage définit comment l'information est stockée et organisée
+    Le modèle fonctionnel définit les services fournis par l'annuaire (recherche, ajout, ...)
+    Le modèle d'information définit le type d'informations stockées
+    Le modèle de sécurité définit les droits d'accès aux ressources
+
+-SEARCH-
+baseObject:le DN (Distinguished Name) de l'entrée à partir de laquelle effectuer la recherche
+scope
+filter
+derefAliases:indique si la recherche doit suivre les alias dans les entrées (entrée qui font référence à d'autres entrées)
+attributes:liste des attributs à ramener à l'issue de la recherche
+sizeLimit:limitation du nombre d'entrées ramenées à l'issue de la recherche
+timeLimit:limitation du délai de recherche, exprimé en secondes
+typesOnly:ne renvoie que les types d'attribut et non les valeurs
+
+-ATTRIBUT-
+NAME:Nom du type d'attribut
+DESC:Description
+OBSOLETE:indique si le type d'attribut est actif
+SUP:définit le supertype
+EQUALITY:Type d'égalité à mettre en œuvre lors d'une recherche
+ORDERING:Correspondance de tri
+SUBSTR:Correspondance de subtring
+SYNTAX:OID de la syntaxe, et nombre maxi de caractère entre accolade {}
+SINGLE-VALUE:restreint à une seule valeur
+COLLECTIVE:si type d'attribut est collectif
+NO-USER-MODIFICATION:l'utilisateur ne peut pas le modifier
+USAGE:indique l'application
+
+    OID: Object Identifier
+
+    attributetype ( 2.5.4.20 NAME 'telephoneNumber'
+    DESC 'An integer uniquely identifying a user in a domain'
+    EQUALITY telephoneNumberMatch
+    SUBSTR telephoneNumberSubstringMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.50 )
+
+-OBJECT CLASS-
+    ( 2.5.6.6 NAME 'person'
+    SUP top
+    STRUCTURAL
+    MUST ( sn $ cn )
+    MAY ( userPassword $ telephoneNumber $ seeAlso $ description ) )
+
+Type d'objet:STRUCTURAL, ABSTRACT, AUXILIARY (cf. Les classes d'objet)
+DESC:Description de la classe
+OBSOLETE:spécifie que cette classe ne doit plus être utilisée
+AUX:Liste les classes auxquelles cet objet peut appartenir
+MUST:regroupe les attributs d'un objectClass qui doivent être présent, ou au moins une valeur.
+MAY:liste les attributs facultatifs.
+NOT:Liste les attributs qui ne doivent pas être utilisés
+SUP:Classe parent étendue. (toutes les entrées héritent directement ou indirectement de la class top).
+
+---LDIF (LDAP Data Interchange Format)---
+ex:
+ dn: cn=Jean-Christian Ranu,ou=ventes,dc=cogip,dc=fr
+ objectClass: top
+ objectClass: person
+ objectClass: organizationalPerson
+ objectClass: inetOrgPerson
+ cn: Jean-Christian Ranu
+ cn: JC Ranu
+ displayName: Jean-Christian Ranu
+
+-REFERAL-
+    dn: ou=groups,dc=cogip,dc=fr
+    objectClass: referral
+    ref: ldap://ldap2.cogip.fr/ou=groups,dc=cogip,dc=fr
+
+-ALIAS-
+    dn: uid=jcranu,ou=users,dc=cogip,dc=fr
+    objectClass: alias
+    objectClass: extensibleObject
+    aliasedObjectName: uid=dauteuil,ou=users,dc=gofip,dc=fr
+
+###################
 
 -FCT-
 ldap_8859_to_t61 — Convertit les caractères 8859 en caractères t61
