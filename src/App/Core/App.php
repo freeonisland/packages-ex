@@ -14,11 +14,11 @@ class App
 
     public static function run()
     {
-        Flight::map('error', function(\Exception $ex){
+        /*Flight::map('error', function(\Error $er){
             // Handle error
-            echo 'Error:'.$ex->getMessage().'<br>';
+            echo 'Error:'.$er->getMessage().'<br>';
             //echo $ex->getTraceAsString();
-        });
+        });*/
                 
         self::exceptionHandling();
         self::callRoute();
@@ -78,6 +78,10 @@ class App
     {
         set_exception_handler(function(\Exception $ex){
             echo 'Exception:'.$ex->getMessage().'<br>';
+        });
+
+        set_error_handler(function(\Error $ex){
+            echo 'Error:'.$ex->getMessage().'<br>';
         });
     }
 }

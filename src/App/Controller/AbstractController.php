@@ -11,10 +11,21 @@ class AbstractController
      * Container
      */
     protected $container;
+    protected $get;
+    protected $post;
+
+
 
     public function __construct(Container $container)
     {
         $this->container = $container;
+        $this->getRequest();
+    }
+
+    public function getRequest()
+    {
+        $this->get = \Flight::request()->query;
+        $this->post = \Flight::request()->data;
     }
 
     /**

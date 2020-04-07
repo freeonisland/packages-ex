@@ -1,4 +1,3 @@
-<?php
 
-echo 'index view';
-echo $alpha;
+
+<a href="/ldap/user/list">Users</a>

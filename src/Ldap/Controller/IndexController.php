@@ -21,7 +21,6 @@ class IndexController extends AbstractController
         $laminasManager->connect();
         $laminasModel = new LaminasModel;
         $laminasModel->runFunctions($laminasManager);
-
-       
     }
+
 }
