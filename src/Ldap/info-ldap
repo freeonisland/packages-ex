@@ -9,7 +9,9 @@ adldap2/adldap2
 directorytree/ldaprecord 
 laminas/laminas-ldap
 
+https://ldap.com
 OID: http://www.iana.org
+https://www.openldap.org/
 
 -login-
 cn=admin,dc=my-company,dc=com
@@ -113,6 +115,8 @@ NOT:Liste les attributs qui ne doivent pas être utilisés
 SUP:Classe parent étendue. (toutes les entrées héritent directement ou indirectement de la class top).
 
 ---LDIF (LDAP Data Interchange Format)---
+https://tools.ietf.org/html/rfc2849
+
 ex:
  dn: cn=Jean-Christian Ranu,ou=ventes,dc=cogip,dc=fr
  objectClass: top
@@ -122,6 +126,16 @@ ex:
  cn: Jean-Christian Ranu
  cn: JC Ranu
  displayName: Jean-Christian Ranu
+ sn: Jensen
+ uid: fiona
+
+ uid (userid), il s'agit d'un identifiant unique obligatoire
+cn (common name), il s'agit du nom de la personne
+givenname, il s'agit du prénom de la personne
+sn (surname), il s'agit du surnom de la personne
+o (organization), il s'agit de l'entreprise de la personne
+u (organizational unit), il s'agit du service de l'entreprise dans laquelle la personne travaille
+mail, il s'agit de l'adresse de courrier électronique de la personne (bien évidemment) 
 
 -REFERAL-
     dn: ou=groups,dc=cogip,dc=fr

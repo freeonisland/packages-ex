@@ -9,10 +9,26 @@ use App\Service\YamlParserService;
 class App
 {
     const NAMESPACE_DEFAULT='App';
-    const ACTION_DEFAULT='indexAction';
-    const CONTROLLER_DEFAULT='IndexController';
+    const ACTION_DEFAULT='index';
+    const CONTROLLER_DEFAULT='Index';
 
     public static function run()
+    {
+        Flight::map('error', function(\Exception $ex){
+            // Handle error
+            echo 'Error:'.$ex->getMessage().'<br>';
+            //echo $ex->getTraceAsString();
+        });
+                
+        self::exceptionHandling();
+        self::callRoute();
+    }
+
+    /*********
+     * Private
+     ********/
+
+    private static function callRoute()
     {
         /**
          * Namespace
@@ -24,16 +40,19 @@ class App
          */
         Flight::route('/(@ns(/@ctrl(/@action(/@params:.*))))', function($ns, $ctrl, $action, $params){
             // Array of HTTP methods matched against
+            $ctrl   = ($ctrl ? ucfirst(strtolower(filter_var($ctrl, FILTER_SANITIZE_URL))) : self::CONTROLLER_DEFAULT);
+            $action = $action ? strtolower(filter_var($action, FILTER_SANITIZE_URL)) : self::ACTION_DEFAULT;
+
             $ns = $ns ? ucfirst(strtolower(filter_var($ns, FILTER_SANITIZE_URL))) : self::NAMESPACE_DEFAULT;
-            $c  = $ctrl ? ucfirst(strtolower(filter_var($ctrl, FILTER_SANITIZE_URL))) . 'Controller' : self::CONTROLLER_DEFAULT;
-            $a  = $action ? strtolower(filter_var($action, FILTER_SANITIZE_URL)) . 'Action' : self::ACTION_DEFAULT;
+            $c  = $ctrl . 'Controller';
+            $a  = $action . 'Action';
             $p  = $params ? explode('/', strtolower(filter_var($params,FILTER_SANITIZE_URL))) : [];
 
             //Container
             $container = new Container;
         
             // Config
-            $config_file = APP_ROOT . "/src/{$ns}/Resources/config-" . strtolower($ns) . ".yml";
+            $config_file = APP_ROOT . "/src/{$ns}/resources/config-" . strtolower($ns) . ".yml";
             if (file_exists($config_file)) {
                 $configManager = new ConfigManager(new YamlParserService);
                 $configManager->loadFilepath($config_file);
@@ -43,10 +62,22 @@ class App
             //Class controller
             $class_ctrl = $ns . '\\Controller\\' . $c;
             $controller = new $class_ctrl($container);
-            $controller->$a(...$p);
+            $view_params = $controller->$a(...$p) ?: [];
+
+            //View
+            $view_path =  APP_ROOT . '/src/' . $ns . '/resources/views';
+            Flight::set('flight.views.path', $view_path);
+            Flight::render($action, $view_params);
 
         }, true);
 
         Flight::start();
+    }
+
+    private static function exceptionHandling()
+    {
+        set_exception_handler(function(\Exception $ex){
+            echo 'Exception:'.$ex->getMessage().'<br>';
+        });
     }
 }

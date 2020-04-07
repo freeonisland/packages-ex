@@ -2,5 +2,6 @@ https://book.cakephp.org/2/fr/core-libraries/components/access-control-lists.htm
 
 -PACKAGES-
 laminas/laminas-permissions-acl
+symfony/security-acl
 https://github.com/symfony/acl-bundle
 (https://github.com/geggleto/geggleto-acl)
