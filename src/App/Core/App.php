@@ -65,7 +65,7 @@ class App
             $view_params = $controller->$a(...$p) ?: [];
 
             //View
-            $view_path =  APP_ROOT . '/src/' . $ns . '/resources/views';
+            $view_path =  APP_ROOT . '/src/' . $ns . '/resources/views/' . strtolower($ctrl);
             Flight::set('flight.views.path', $view_path);
             Flight::render($action, $view_params);
 
