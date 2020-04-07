@@ -80,8 +80,21 @@ class UserController extends AbstractController
     /**
      * 
      */
-    public function deleteAction()
+    public function deleteAction($userId)
     {
+        $user = new User; 
+        $user->setId($userId);
+        $user->name = 'john';
+        $user->surname = 'jy';
         
+        if(count($this->post)) {
+            // Delete data ...
+            //s($this->post);
+            echo 'deleted';
+        }
+
+        return [
+            'user' => $user
+        ]; 
     }
 }

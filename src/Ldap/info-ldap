@@ -9,9 +9,11 @@ adldap2/adldap2
 directorytree/ldaprecord 
 laminas/laminas-ldap
 
+-INFO-
 https://ldap.com
 OID: http://www.iana.org
 https://www.openldap.org/
+http://www.ldapexplorer.com
 
 -login-
 cn=admin,dc=my-company,dc=com
