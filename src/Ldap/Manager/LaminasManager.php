@@ -51,7 +51,7 @@ search(/ * ... * /) : Collection 	Searches the LDAP tree with the given $filter 
     getRootDse() : Node\RootDse 	Returns the RootDSE for the current server.
     getSchema() : Node\Schema
     */
-    function connect(): bool
+    public function connect(): bool
     {
         $options = [
             'host'              => $this->ldapServer,

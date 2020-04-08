@@ -28,6 +28,18 @@ class AbstractController
         $this->post = \Flight::request()->data;
     }
 
+    public function getModule(string $id)
+    {
+        /**
+         * Check config exists
+         */
+        if(!$this->container->has($id)) {
+            return '';
+        }
+
+        return $this->container->has($id);
+    }
+
     /**
      * Get config parameter
      */

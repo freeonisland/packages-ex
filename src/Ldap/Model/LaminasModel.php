@@ -36,25 +36,23 @@ class LaminasModel
      * person: (cn, sn), description, seeAlso, telephoneNumber, userPassword
      */
 
-    public function __construct()
+    public function __construct(LaminasManager $laminasManager)
     {
         $this->basedn = 'dc=my-company,dc=com';
+
+        $this->lm = $laminasManager;
+        $this->ldap = $this->lm->getLdap();
     }
 
     /**
      * try multiple function of ldap (search, insert, etc...)
      */
-    public function runFunctions(LaminasManager $laminasManager)
+    public function runFunctions()
     {
-        $this->lm = $laminasManager;
-        //echo 'ertre.'.$ldap->getBaseNode();
-        //s($this->lm);
-
-        $this->ldap = $this->lm->getLdap();
-
-        $this->search();
         $this->insert();
+        $this->search();
         $this->update();
+        $this->remove();
     }
 
     /** 
@@ -95,5 +93,10 @@ class LaminasModel
         $s=$this->ldap->search('objectClass=*', $this->basedn, Ldap::SEARCH_SCOPE_SUB);
         //s($this->ldap->getEntry());
         //s(get_class_methods($this->ldap));
+    }
+
+    private function remove()
+    {
+        
     }
 }

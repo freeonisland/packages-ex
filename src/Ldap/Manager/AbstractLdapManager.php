@@ -13,5 +13,9 @@ abstract class AbstractLdapManager
         $this->ldapServer = $ldap_server;
         $this->ldapDn = $ldap_dn;
         $this->ldapPass = $ldap_pass;
+
+        $this->connect();
     }
+
+    public abstract function connect(): bool;
 }

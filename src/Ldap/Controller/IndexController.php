@@ -14,13 +14,7 @@ class IndexController extends AbstractController
      */
     public function indexAction()
     {
-        $simpleManager = new SimpleManager($this->getParam('LDAP_SERVER'), $this->getParam('LDAP_DN'), $this->getParam('LDAP_PASSWORD'));
-        //$simpleManager->connect();
-
-        $laminasManager = new LaminasManager($this->getParam('LDAP_SERVER'), $this->getParam('LDAP_DN'), $this->getParam('LDAP_PASSWORD'));
-        $laminasManager->connect();
-        $laminasModel = new LaminasModel;
-        $laminasModel->runFunctions($laminasManager);
+        
     }
 
 }

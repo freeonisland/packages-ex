@@ -59,6 +59,17 @@ class App
                 $container->set(ConfigManager::NAME_CONTAINER, $configManager);
             }
 
+            $config = $configManager??null;
+
+            // modules
+            $modules_file = APP_ROOT . "/src/{$ns}/resources/modules-" . strtolower($ns) . ".php";
+            if (file_exists($modules_file)) {
+                $modules = include $modules_file;
+                foreach($modules as $name => $module) {
+                    $container->set($name, $module);
+                }
+            }
+
             //Class controller
             $class_ctrl = $ns . '\\Controller\\' . $c;
             $controller = new $class_ctrl($container);

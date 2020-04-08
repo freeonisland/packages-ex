@@ -12,6 +12,8 @@ class UserController extends AbstractController
      */
     public function listAction()
     {
+        $this->getModule('LaminasManager');
+
         $users = [
             ['id'=>0, 'name'=>'michel'],
             ['id'=>1, 'name'=>'alphonse'],
