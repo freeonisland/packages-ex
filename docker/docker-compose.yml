@@ -19,6 +19,11 @@ services:
         volumes:
             - ${WEBSERVER}/packages:/usr/share/nginx/html
     
+    # haproxy:
+    #     image: haproxy
+    #     volumes:
+    #         - ${WEBSERVER}/packages/docker/conf/haproxy/haproxy:/usr/local/etc/haproxy/haproxy.cfg
+    
     # php-oauth-server:
     #     image: php:fpm
     #     container_name: php-oauth-server
