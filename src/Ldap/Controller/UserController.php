@@ -4,6 +4,7 @@ namespace Ldap\Controller;
 
 use App\Controller\AbstractController;
 use Ldap\Entity\User;
+use Ldap\Entity\LaminasRepository;
 
 class UserController extends AbstractController
 {
@@ -28,10 +29,18 @@ class UserController extends AbstractController
     public function createAction()
     {
         $user = new User; 
+        $lm = $this->getModule('LaminasManager');
+        
         if($this->post) {
             // Create data ...
-
+            $lm->add('person', [
+                'cn' => $this->post['user_name'],
+                'sn' => $this->post['user_surname']
+            ]);
             //s($this->post);
+        //     'user_name' => string (3) "aze"
+        // 'user_surname' => string (6) "azesur"
+        // 'user_phone' => string (7) "0147852"
             //$user->name = $this->post['user_name'];
         }
 

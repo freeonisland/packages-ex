@@ -5,5 +5,5 @@
             <input type="text" name="user_<?= $propertie ?>" value="<?= $value ?>"/>
         </div>
     <?php endforeach; ?>
-    <button type="submit">Update user</button>
+    <button type="submit"><?= 'create'==$_ctrl_action ? 'Create' : 'Update' ?> user</button>
 </form>

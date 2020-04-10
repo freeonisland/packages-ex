@@ -8,6 +8,7 @@ class LaminasManager extends AbstractLdapManager implements LdapManagerInterface
 {
     private $ldap;
 
+    
     /*  
      * $options = [
         'host'              => 's0.foo.net',
@@ -81,8 +82,34 @@ search(/ * ... * /) : Collection 	Searches the LDAP tree with the given $filter 
         return $this->ldap;
     }
 
-    function insert(string $string)
+    /** 
+     * Search into 
+     */
+    private function search($filter)
     {
-        $this->ldap->add();
+        $s=$this->ldap->searchEntry($filter, $this->basedn, Ldap::SEARCH_SCOPE_SUB);
+        //s($this->ldap->getEntry());
+        //s(get_class_methods($this->ldap));
+    }
+
+    public function add(string $objectClass, array $data)
+    {
+        /**
+         * add
+         */
+        $data['objectClass'] = $objectClass;
+
+        try {
+            $dn = "cn={$data['cn']},".$this->basedn;
+            $this->ldap->add($dn, $data);
+            echo 'Data inserted...<br/>';
+        } catch(\Exception $e) { echo 'EXCEPTION:'.$e->getMessage().'<br/>'; } 
+    }
+
+    private function update()
+    {
+        $s=$this->ldap->search('objectClass=*', $this->basedn, Ldap::SEARCH_SCOPE_SUB);
+        //s($this->ldap->getEntry());
+        //s(get_class_methods($this->ldap));
     }
 }

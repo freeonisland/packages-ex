@@ -37,7 +37,7 @@ class AbstractController
             return '';
         }
 
-        return $this->container->has($id);
+        return $this->container->get($id);
     }
 
     /**

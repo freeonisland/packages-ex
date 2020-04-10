@@ -2,7 +2,7 @@ version: '2.2'
 
 services: 
     nginx:
-        image: nginx
+        image: nginx #1.17
         container_name: nginx
         volumes:
             - ${WEBSERVER}/packages:/usr/share/nginx/html
@@ -51,7 +51,7 @@ services:
     #         - 8080:8080
     
     ldap-server:
-        image: osixia/openldap
+        image: osixia/openldap:1.2.5  #(openldap 2.4)
         container_name: ldap-server
         ports:
             - 389:389
@@ -60,7 +60,22 @@ services:
             LDAP_ORGANISATION: "My Company"
             LDAP_DOMAIN: "my-company.com"
             LDAP_ADMIN_PASSWORD: "JonSn0w"
-    
+    #     - type: volume
+    #     source: mydata
+    #     target: /data
+    #     volume:
+    #       nocopy: true
+    #   - type: bind
+    #     source: ./static
+    #     target: /opt/app/static
+            
+            #for data persistance
+            #LDAP_OPENLDAP_GID: 1234 
+            #LDAP_OPENLDAP_UID: 2345
+        # volumes: 
+        #     - ${WEBSERVER}/packages/docker/data/ldap/lib:/var/lib/ldap
+        #     - ${WEBSERVER}/packages/docker/data/ldap/slapd.d:/etc/ldap/slapd.d
+
             # LDAP_BASE_DN
             # {{ LDAP_BACKEND }}
             # {{ LDAP_DOMAIN }}
@@ -68,14 +83,19 @@ services:
             # {{ LDAP_READONLY_USER_PASSWORD_ENCRYPTED }
     
     ldap-admin: 
-        image: osixia/phpldapadmin
+        #http://phpldapadmin.sourceforge.net/wiki/index.php/LDAP_server_definitions
+        #http://phpldapadmin.sourceforge.net/wiki/index.php/Config.php
+        image: osixia/phpldapadmin:0.9.0 #phpLDAPadmin 1.2.5
         container_name: ldap-admin
         #login: cn=admin,dc=my-company,dc=com
         ports:
             - 6443:443
-        environment:
-            PHPLDAPADMIN_LDAP_HOSTS: ldap-server
+        #environment:
+        #    PHPLDAPADMIN_LDAP_HOSTS: ldap-server
         #PHPLDAP_IP=$(docker inspect -f "{{ .NetworkSettings.IPAddress }}" phpldapadmin-service)
+        volumes:
+            - ${WEBSERVER}/packages/docker/conf/ldapadmin/config.php:/container/service/phpldapadmin/assets/config/config.php
+        command: --copy-service
     
     # minio:
     #     image: minio/minio
