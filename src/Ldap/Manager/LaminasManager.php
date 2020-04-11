@@ -98,9 +98,10 @@ search(/ * ... * /) : Collection 	Searches the LDAP tree with the given $filter 
     int $timelimit
 ) : Collection
      */
-    public function search($filter, array $return_attr=['*'])
+    public function search($filter, $basedn=null, $scope=Ldap::SEARCH_SCOPE_SUB, $return_attr=['*'])
     {
-        $s=$this->ldap->searchEntries($filter, $this->basedn, Ldap::SEARCH_SCOPE_SUB, $return_attr);
+        $basedn = $basedn ?? $this->basedn;
+        $s=$this->ldap->searchEntries($filter, $basedn, $scope, $return_attr);
         //s($this->ldap->getEntry());
         return $s;
         //s(get_class_methods($this->ldap));
