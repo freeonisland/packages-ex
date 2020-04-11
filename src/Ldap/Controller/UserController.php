@@ -73,7 +73,7 @@ class UserController extends AbstractController
         $s="(&(objectClass=person)(cn={$userId}))";
         $user=$lm->search($s);
         
-        if(count($this->post)) {
+        if($this->post) {
             // Update data ...
             $lm->update('person', $this->post['uid'], [
                 'cn' => $this->post['cn'],
