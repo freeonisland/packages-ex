@@ -70,9 +70,7 @@ class UserController extends AbstractController
     public function updateAction(string $userId)
     {
         $lm=$this->getModule('LaminasManager');
-        $s="(&(objectClass=person)(cn={$userId}))";
-        $user=$lm->search($s);
-        
+
         if($this->post) {
             // Update data ...
             $lm->update('person', $this->post['uid'], [
@@ -80,6 +78,9 @@ class UserController extends AbstractController
                 'sn' => $this->post['sn']
             ]);
         }
+
+        $s="(&(objectClass=person)(cn={$userId}))";
+        $user=$lm->search($s);
 
         return [
             'user' => $user[0]
