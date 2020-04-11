@@ -92,7 +92,7 @@ class UserController extends AbstractController
     public function viewAction(string $userId)
     {
         $lm = $this->getModule('LaminasManager');
-        $user=$lm->search('(&(cn=aqwzxs)(objectClass=person))');
+        $user=$lm->search("(&(cn={$userId})(objectClass=person))");
 
         return [
             'user' => $user?$user[0]:null
