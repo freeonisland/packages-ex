@@ -2,7 +2,9 @@
 
 namespace Ldap\Manager;
 
+use Laminas\Ldap\Dn;
 use Laminas\Ldap\Ldap;
+use Laminas\Ldap\Attribute;
 
 class LaminasManager extends AbstractLdapManager implements LdapManagerInterface
 {
@@ -82,13 +84,25 @@ search(/ * ... * /) : Collection 	Searches the LDAP tree with the given $filter 
         return $this->ldap;
     }
 
-    /** 
-     * Search into 
+    /*
+     * Search
+     * 
+     * search(
+    string|Filter\AbstractFilter $filter,
+    string|Dn $basedn,
+    int $scope,
+    array $attributes,
+    string $sort,
+    string $collectionClass,
+    int $sizelimit,
+    int $timelimit
+) : Collection
      */
-    private function search($filter)
+    public function search($filter, array $return_attr=['*'])
     {
-        $s=$this->ldap->searchEntry($filter, $this->basedn, Ldap::SEARCH_SCOPE_SUB);
+        $s=$this->ldap->searchEntries($filter, $this->basedn, Ldap::SEARCH_SCOPE_SUB, $return_attr);
         //s($this->ldap->getEntry());
+        return $s;
         //s(get_class_methods($this->ldap));
     }
 

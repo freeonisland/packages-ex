@@ -7,3 +7,7 @@
     <?php endforeach; ?>
     <button type="submit"><?= 'create'==$_ctrl_action ? 'Create' : 'Update' ?> user</button>
 </form>
+
+<script>
+    
+</script>

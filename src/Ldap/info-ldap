@@ -6,6 +6,7 @@ laminas/laminas-ldap
 -INFO-
 https://ldap.com
 http://oid-info.com
+https://ldapwiki.com/
 OID: http://www.iana.org
 https://www.openldap.org
 http://www.ldapexplorer.com
@@ -137,6 +138,9 @@ MAY:liste les attributs facultatifs.
 NOT:Liste les attributs qui ne doivent pas être utilisés
 SUP:Classe parent étendue. (toutes les entrées héritent directement ou indirectement de la class top).
 
+-SCHEMAS LIST-
+ldapsearch -H ldap://localhost -x -s base -b "cn=subschema" objectclasses
+
 ---LDIF (LDAP Data Interchange Format)---
 https://tools.ietf.org/html/rfc2849
 https://tools.ietf.org/html/rfc2252
@@ -191,7 +195,7 @@ mail, il s'agit de l'adresse de courrier électronique de la personne (bien évi
 
 ###################
 
--FCT-
+-FCT PHP-
 ldap_8859_to_t61 — Convertit les caractères 8859 en caractères t61
 ldap_add_ext — Add entries to LDAP directory
 ldap_add — Ajoute une entrée dans un dossier LDAP

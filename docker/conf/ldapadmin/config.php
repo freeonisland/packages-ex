@@ -70,4 +70,4 @@ $servers->newServer('ldap_pla');
 $servers->setValue('server','name','ldap-server');
 $servers->setValue('server','host','ldap-server');
 
-$servers->setValue('login','timeout',3000);
+$servers->setValue('login','timeout',300000);
