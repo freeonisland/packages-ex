@@ -121,10 +121,33 @@ search(/ * ... * /) : Collection 	Searches the LDAP tree with the given $filter 
         } catch(\Exception $e) { echo 'EXCEPTION:'.$e->getMessage().'<br/>'; } 
     }
 
-    private function update()
+    public function update(string $objectClass, string $uid, array $data)
     {
-        $s=$this->ldap->search('objectClass=*', $this->basedn, Ldap::SEARCH_SCOPE_SUB);
-        //s($this->ldap->getEntry());
-        //s(get_class_methods($this->ldap));
+        /**
+         * add
+         */
+        $data['objectClass'] = $objectClass;
+
+        try {
+            $dn = "cn={$uid},".$this->basedn;
+            $this->ldap->update($dn, $data);
+            echo 'Data updated...<br/>';
+        } catch(\Exception $e) { echo 'EXCEPTION:'.$e->getMessage().'<br/>'; } 
     }
+
+    public function delete(string $uid)
+    {
+        try {
+            $dn = "cn={$uid},".$this->basedn;
+            $this->ldap->delete($dn);
+            echo 'Data deleted...<br/>';
+        } catch(\Exception $e) { echo 'EXCEPTION:'.$e->getMessage().'<br/>'; } 
+    }
+
+    public function get($uid)
+    {
+        $res=$this->search('cn='.$uid);
+        return $res;
+    }
+
 }

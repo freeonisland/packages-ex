@@ -37,6 +37,7 @@ class UserController extends AbstractController
     {
         $lm = $this->getModule('LaminasManager');
         $schemas = $this->schemas();
+        $res = $lm->search('objectClass=person');
 
         return [
             'users' => $res??[]
@@ -47,50 +48,41 @@ class UserController extends AbstractController
      * 
      */
     public function createAction()
-    {
-        $user = new User; 
+    {   
         $lm = $this->getModule('LaminasManager');
         
         if($this->post) {
             // Create data ...
             $lm->add('person', [
-                'cn' => $this->post['user_name'],
-                'sn' => $this->post['user_surname']
+                'cn' => $this->post['cn'],
+                'sn' => $this->post['sn']
             ]);
-            //s($this->post);
-        //     'user_name' => string (3) "aze"
-        // 'user_surname' => string (6) "azesur"
-        // 'user_phone' => string (7) "0147852"
-            //$user->name = $this->post['user_name'];
         }
 
         return [
-            'user' => get_object_vars($user)
+            'user' => [
+                'cn'=>[''],
+                'sn'=>['']
+            ]
         ]; 
     }
 
-    /**
-     * 
-     */
     public function updateAction(string $userId)
     {
-        $user = new User; 
         $lm=$this->getModule('LaminasManager');
         $s="(&(objectClass=person)(cn={$userId}))";
         $user=$lm->search($s);
         
-        
         if(count($this->post)) {
             // Update data ...
-            //s($this->post);
-            
-            $user->name = $this->post['user_name'];
-            $user->surname = $this->post['user_surname'];
-            $user->phone = $this->post['user_phone'];
+            $lm->update('person', $this->post['uid'], [
+                'cn' => $this->post['cn'],
+                'sn' => $this->post['sn']
+            ]);
         }
 
         return [
-            'user' => $user
+            'user' => $user[0]
         ]; 
     }
 
@@ -99,7 +91,6 @@ class UserController extends AbstractController
      */
     public function viewAction(string $userId)
     {
-        $user = new User; 
         $lm = $this->getModule('LaminasManager');
         $user=$lm->search('(&(cn=aqwzxs)(objectClass=person))');
 
@@ -111,21 +102,24 @@ class UserController extends AbstractController
     /**
      * 
      */
-    public function deleteAction($userId)
+    public function deleteAction(string $userId)
     {
-        $user = new User; 
-        $user->setId($userId);
-        $user->name = 'john';
-        $user->surname = 'jy';
+        $lm = $this->getModule('LaminasManager');
+        $user=$lm->get($userId);
+             
         
         if(count($this->post)) {
             // Delete data ...
-            //s($this->post);
-            echo 'deleted';
+            s($this->post);
+            if('yes'===$this->post['confirm']) {
+                $lm->delete($userId);
+                \Flight::redirect('/ldap/user/list');
+                die();
+            }
         }
 
         return [
-            'user' => $user
+            'user' => $user[0]
         ]; 
     }
 }

@@ -24,8 +24,8 @@ class AbstractController
 
     public function getRequest()
     {
-        $this->get = \Flight::request()->query;
-        $this->post = \Flight::request()->data;
+        $this->get = count(\Flight::request()->query) ? \Flight::request()->query : null;
+        $this->post = count(\Flight::request()->data) ? \Flight::request()->data : null;
     }
 
     public function getModule(string $id)
