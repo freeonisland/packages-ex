@@ -8,6 +8,28 @@ use Ldap\Entity\LaminasRepository;
 
 class UserController extends AbstractController
 {
+    public function schemas(): array
+    {
+        $lm = $this->getModule('LaminasManager');
+        $s = $lm->search( 
+            'objectClass=subSchema',
+            'cn=Subschema',
+            \Laminas\Ldap\Ldap::SEARCH_SCOPE_BASE, 
+            ['objectclasses']
+        );
+        $s = $s ? $s[0]['objectclasses'] : [];
+        $r=[];
+        array_walk($s,function($v,$k) use (&$r) {
+           //$s[$k] =
+           preg_match("/NAME '(\w*)'/",$v,$m);
+           if(isset($m[1])) {
+               $r[$m[1]] = $v;
+           }
+        });
+        
+        return $r;
+    }
+
     /**
      * 
      */
@@ -28,9 +50,8 @@ class UserController extends AbstractController
     public function createAction()
     {   
         $lm = $this->getModule('LaminasManager');
-        $schemas = $lm->getSchemas();
         
-        if($this->post && 'yes' !== $this->post['onlychange']) {
+        if($this->post) {
             // Create data ...
             $lm->add('person', [
                 'cn' => $this->post['cn'],
@@ -42,9 +63,7 @@ class UserController extends AbstractController
             'user' => [
                 'cn'=>[''],
                 'sn'=>['']
-            ],
-            'schemas' => $schemas,
-            'post' => $this->post
+            ]
         ]; 
     }
 

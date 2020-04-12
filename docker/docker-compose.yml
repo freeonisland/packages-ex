@@ -2,7 +2,7 @@ version: '2.2'
 
 services: 
     nginx:
-        image: nginx #1.17
+        image: nginx:1.17
         container_name: nginx
         volumes:
             - ${WEBSERVER}/packages:/usr/share/nginx/html
@@ -12,6 +12,9 @@ services:
           
     phpfpm: 
         build: ./conf/fpm
+
+        # apt-get install openssh-server
+        # systemctl enable ssh
         container_name: phpfpm
         working_dir: /usr/share/nginx/html
         ports: 

@@ -84,6 +84,37 @@ search(/ * ... * /) : Collection 	Searches the LDAP tree with the given $filter 
         return $this->ldap;
     }
 
+    public function getSchemas(): array
+    {
+        $s = $this->search( 
+            'objectClass=subSchema',
+            'cn=Subschema',
+            \Laminas\Ldap\Ldap::SEARCH_SCOPE_BASE, 
+            ['objectclasses']
+        );
+        $s = $s ? $s[0]['objectclasses'] : [];
+        $r=[];
+        array_walk($s,function($v,$k) use (&$r) {
+            preg_match("/NAME\s'([\w-]*)'/",$v,$name);
+            $r[$name[1]]['description'] = $v;
+            
+            $v = explode('MAY',$v);
+            $may = count($v)<2 ? null : explode('$',str_replace(['(',')',' '],'',$v[1]));
+            if ($may) sort($may);
+
+            $v = explode('MUST',$v[0]);
+            $must = count($v)<2 ? null : explode('$',str_replace(['(',')',' '],'',$v[1]));
+            if ($must) sort($must);
+
+            $r[$name[1]]['must'] = $must;
+            $r[$name[1]]['may'] = $may;
+        });
+
+        ksort($r);
+        
+        return $r;
+    }
+
     /*
      * Search
      * 
