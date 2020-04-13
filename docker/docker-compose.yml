@@ -21,14 +21,8 @@ services:
             - 9000:9000
         volumes:
             - ${WEBSERVER}/packages:/usr/share/nginx/html
-          #  - ${WEBSERVER}/packages/docker/conf/fpm/.ssh:/root/.ssh
-        
-        #command: 
-        # sshpass -v -f /pass ssh-copy-id -i /root/.ssh/id_rsa ldap-server
-        #ssh-keyscan -H ldap-server >> /root/.ssh/known_hosts
-        # sshpass -f /pass ssh ldap-server
-        #add known_hosts
-        
+        depends_on: 
+            - ldap-server
 
     
     # haproxy:
@@ -72,11 +66,6 @@ services:
             LDAP_ORGANISATION: "My Company"
             LDAP_DOMAIN: "my-company.com"
             LDAP_ADMIN_PASSWORD: "JonSn0w"
-        depends_on: 
-            - phpfpm
-        #volumes:
-          #  - ${WEBSERVER}/packages/docker/conf/fpm/.ssh/id_rsa.pub:/root/.ssh/authorized_keys
-        #    - ${WEBSERVER}/packages/docker/conf/ldap/.ssh/authorized_keys:/root/.ssh/authorized_keys
         
     #     - type: volume
     #     source: mydata
@@ -105,7 +94,6 @@ services:
         #http://phpldapadmin.sourceforge.net/wiki/index.php/Config.php
         image: osixia/phpldapadmin:0.9.0 #phpLDAPadmin 1.2.5
         container_name: ldap-admin
-        #login: cn=admin,dc=my-company,dc=com
         ports:
             - 6443:443
         #environment:
