@@ -30,13 +30,30 @@ class UserController extends AbstractController
         $lm = $this->getModule('LaminasManager');
         $schemas = $lm->getSchemas();
         
-        if($this->post && 'yes' !== $this->post['onlychange']) {
+        if ($this->post && 'yes' !== $this->post['onlychange']) {
             // Create data ...
             $lm->add('person', [
                 'cn' => $this->post['cn'],
                 'sn' => $this->post['sn']
             ]);
         }
+
+        $comm = 'ssh -o StrictHostKeyChecking=no root@ldap-server "ldapcompare" 2>&1';
+        $exec=exec($comm, $out);
+        s($out);
+        /*$exec=shell_exec($comm);
+        s($exec);
+        s($out);
+        $exec=system($comm);
+        s($exec);
+        $exec=`ssh`;
+        s($exec);
+        $exec=passthru($comm);
+        s($exec);
+
+        exec("ping -c 1 yhoo.dsd 2>&1", $output, $return_var);
+        s($output);
+        s($return_var);*/
 
         return [
             'user' => [
