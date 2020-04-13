@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y openssh-server
 RUN echo 'root:root' | chpasswd
 RUN sed -i -E 's/#?PasswordAuthentication\s.*/PasswordAuthentication yes/g' /etc/ssh/sshd_config
 RUN sed -i -E 's/#?PermitRootLogin\s.*/PermitRootLogin yes/g' /etc/ssh/sshd_config
+RUN sed -i -E 's/#?PubkeyAuthentication\s.*/PubkeyAuthentication yes/g' /etc/ssh/sshd_config
 
 ENTRYPOINT /etc/init.d/ssh start && /container/tool/run
 

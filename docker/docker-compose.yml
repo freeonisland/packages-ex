@@ -21,9 +21,14 @@ services:
             - 9000:9000
         volumes:
             - ${WEBSERVER}/packages:/usr/share/nginx/html
-        depends_on: 
-            - ldap-server
-        #command: sshpass -f /pass ssh-copy-id -i /root/.ssh/id_rsa ldap-server
+          #  - ${WEBSERVER}/packages/docker/conf/fpm/.ssh:/root/.ssh
+        
+        #command: 
+        # sshpass -v -f /pass ssh-copy-id -i /root/.ssh/id_rsa ldap-server
+        #ssh-keyscan -H ldap-server >> /root/.ssh/known_hosts
+        # sshpass -f /pass ssh ldap-server
+        #add known_hosts
+        
 
     
     # haproxy:
@@ -39,14 +44,14 @@ services:
     #     volumes:
     #         - /WEBSERVER/packages:/usr/share/nginx/html
     
-    mariadb: 
-        image: mariadb
-        container_name: mariadb
-        ports: 
-            - 3306:3306
-        restart: always
-        environment:
-            MYSQL_ROOT_PASSWORD: example
+    # mariadb: 
+    #     image: mariadb
+    #     container_name: mariadb
+    #     ports: 
+    #         - 3306:3306
+    #     restart: always
+    #     environment:
+    #         MYSQL_ROOT_PASSWORD: example
         # volumes: 
         #     - /WEBSERVER/packages/data:/var/lib/mysql
     
@@ -67,6 +72,11 @@ services:
             LDAP_ORGANISATION: "My Company"
             LDAP_DOMAIN: "my-company.com"
             LDAP_ADMIN_PASSWORD: "JonSn0w"
+        depends_on: 
+            - phpfpm
+        #volumes:
+          #  - ${WEBSERVER}/packages/docker/conf/fpm/.ssh/id_rsa.pub:/root/.ssh/authorized_keys
+        #    - ${WEBSERVER}/packages/docker/conf/ldap/.ssh/authorized_keys:/root/.ssh/authorized_keys
         
     #     - type: volume
     #     source: mydata
