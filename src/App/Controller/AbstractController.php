@@ -34,6 +34,7 @@ class AbstractController
          * Check config exists
          */
         if(!$this->container->has($id)) {
+            throw New \InvalidArgumentException("Module $id not found");
             return '';
         }
 

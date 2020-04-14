@@ -59,7 +59,13 @@
     },
     "autoload" : {
         "psr-4": {
-            "": "src/"
+            "Api\\": "src/Api/",
+            "App\\": "src/App/",
+            "Ext\\": "src/Ext/",
+            "Package\\": "src/Package/",
+            
+            "Storage\\": "src/Storage/",
+            "Ldap\\": "src/Storage/Ldap/"
         }
     },
     "extra": {
