@@ -17,10 +17,9 @@
         "mikecao/flight": "^1",
         "laravel/lumen-framework": "^7.0",
         "slim/slim": "^4.4",
-        
+
         "adldap2/adldap2": "^10.2",
         "directorytree/ldaprecord": "^1.2",
-        "laminas/laminas-ldap": "^2.10",
         
         "league/oauth2-client": "^2",
         "league/oauth2-google": "^3.0",
@@ -32,8 +31,7 @@
         "guzzlehttp/guzzle": "^6.5",
         "monolog/monolog": "^2",
         "paragonie/cookie": "^3.2",
-        "php-di/php-di": "^6.0",
-        "symfony/yaml": "^5.0"
+        "php-di/php-di": "^6.0"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",

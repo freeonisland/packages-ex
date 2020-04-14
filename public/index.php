@@ -4,6 +4,7 @@ ini_set('display_errors','on');
 error_reporting(E_ALL);
 
 require '../vendor/autoload.php';
+require '../frame/vendor/autoload.php';
 
 define ('APP_ROOT', realpath(__DIR__.'/../'));
 
