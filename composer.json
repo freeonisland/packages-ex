@@ -10,17 +10,22 @@
         }
     ],
     "config": {
+        "bin-dir": "bin",
         "sort-packages": false
     },
     "require": {
-        "bcosca/fatfree": "^3.7",
         "mikecao/flight": "^1",
+        "laminas/laminas-mvc": "^3.1",
         "laravel/lumen-framework": "^7.0",
         "slim/slim": "^4.4",
+        "symfony/symfony": "^5.0",
 
-        "adldap2/adldap2": "^10.2",
-        "directorytree/ldaprecord": "^1.2",
+        "laminas-api-tools/api-tools": "^1.4",
+        "laminas/laminas-ldap": "^2.10",
         
+        "laminas/laminas-stratigility": "^3.1",
+        "mezzio/mezzio": "^3.2",
+      
         "league/oauth2-client": "^2",
         "league/oauth2-google": "^3.0",
         "league/oauth2-server": "^8",
@@ -29,9 +34,7 @@
         
         "aws/aws-sdk-php": "^3.1",
         "guzzlehttp/guzzle": "^6.5",
-        "monolog/monolog": "^2",
-        "paragonie/cookie": "^3.2",
-        "php-di/php-di": "^6.0"
+        "paragonie/cookie": "^3.2"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",
@@ -59,16 +62,14 @@
         "psr-4": {
             "Api\\": "src/Api/",
             "App\\": "src/App/",
-            "Ext\\": "src/Ext/",
-            "Package\\": "src/Package/",
             
-            "Storage\\": "src/Storage/",
-            "Ldap\\": "src/Storage/Ldap/"
+            "Ldap\\": "src/Storage/Ldap/src/"
         }
     },
     "extra": {
+        "bcosca/fatfree": "^3.7 ERROR WITH PHPUNIT",
         "consolidation/robo": "*",
-        "phpunit/phpunit-skeleton-generator": "*",
-        "laminas/laminas-permissions-acl": "2.7"
+        "laminas/laminas-soap": "^2.8",
+        "phpunit/phpunit-skeleton-generator": "*"
     }
 }

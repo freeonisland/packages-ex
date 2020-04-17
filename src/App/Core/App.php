@@ -3,8 +3,7 @@
 namespace App\Core;
 
 use Flight;
-use App\Manager\ConfigManager;
-use App\Service\YamlParserService;
+use App\Core\Bundle;
 
 class App
 {
@@ -69,20 +68,21 @@ class App
             //Container
             $container = new Container;
 
-            $src_path = new \DirectoryIterator(APP_ROOT.'/src/');
-            $basename=false;
-            foreach($src_path as $sub_dir) {
-                $dir_name = $sub_dir->getBasename();
-                if(is_dir(APP_ROOT.'/src/'.$dir_name .'/'. $ns)) {
-                    $basename = APP_ROOT.'/src/'.$dir_name .'/'. $ns;
-                }
+            
+            /*
+             * bundle
+             */
+            $bundle = new Bundle($ns);
+            $bundle_config = $bundle->loadConfig();
+            $container->set(\App\Manager\ConfigManager::NAME_CONTAINER, $bundle_config);
+
+            $bundle_modules = $bundle->loadModules();
+            foreach($bundle_modules as $name => $module) {
+                $container->set($name, $module);
             }
 
-            if(!$basename) {
-                throw new \FileNotFoundException("Controller $ns/$c not found");
-            }
         
-            // Config
+            /*// Config
             $config_file = "{$basename}/resources/config-" . strtolower($ns) . ".yml";
             if (file_exists($config_file)) {
                 $configManager = new ConfigManager(new YamlParserService);
@@ -90,16 +90,16 @@ class App
                 $container->set(ConfigManager::NAME_CONTAINER, $configManager);
             }
 
-            $config = $configManager??null;
-
+            
             // modules
+            $config = $configManager??null;
             $modules_file = "{$basename}/resources/modules-" . strtolower($ns) . ".php";
             if (file_exists($modules_file)) {
                 $modules = include $modules_file;
                 foreach($modules as $name => $module) {
                     $container->set($name, $module);
                 }
-            }
+            }*/
 
             //Class controller
             $class_ctrl = $ns . '\\Controller\\' . $c;

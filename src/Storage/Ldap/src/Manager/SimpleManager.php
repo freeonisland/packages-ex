@@ -2,11 +2,12 @@
 
 namespace Ldap\Manager;
 
-class SimpleManager extends AbstractLdapManager implements LdapManagerInterface
+/*class SimpleManager extends AbstractLdapManager implements LdapManagerInterface
 {
     public function connect(): bool
     {
-        $ldap_conn = ldap_connect('ldap://' . $this->ldapServer);
+        //$ldap_conn = ldap_connect('ldap://' . $this->ldapServer);
+        return false;
 
         try {
             if ($d=ldap_bind_ext($ldap_conn, $this->ldapDn, $this->ldapPass, [['oid' => LDAP_CONTROL_PASSWORDPOLICYREQUEST]] )) {
@@ -20,7 +21,7 @@ class SimpleManager extends AbstractLdapManager implements LdapManagerInterface
         return false;
     }
 
-}
+}*/
 
 
 
