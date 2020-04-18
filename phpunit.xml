@@ -2,7 +2,7 @@
 <!-- http://phpunit.de/manual/4.1/en/appendixes.configuration.html xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/6.3/phpunit.xsd"-->
 <phpunit 
-         bootstrap="src/autoload.php"
+         bootstrap="tests/bootstrap.php"
          colors="true"
          verbose="true"
         >
@@ -10,13 +10,15 @@
   <!--printerFile="/path/to/ResultPrinter.php"-->
   <!--testSuiteLoaderFile="/path/to/StandardTestSuiteLoader.php"-->
 
-  <!--testsuites>
-      <testsuite name="Bundle Test Suite">
-          <directory>src/*/*/test</directory>
+  <testsuites>
+      <testsuite name="Bundles Test Suite">
+          <directory>tests/**</directory>
       </testsuite>
-  </testsuites-->
+  </testsuites>
+  
     <php>
-         <ini name="display_errors" value="false"/>
+        <server name="KERNEL_CLASS" value="App\Kernel" />
+        <ini name="display_errors" value="false"/>
     </php>
 
 </phpunit>

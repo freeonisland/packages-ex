@@ -21,6 +21,7 @@ services:
             - 9000:9000
         volumes:
             - ${WEBSERVER}/packages:/usr/share/nginx/html
+            - ${WEBSERVER}/packages/bin/symfony:/usr/bin/symfony
         depends_on: 
             - ldap-server
 
