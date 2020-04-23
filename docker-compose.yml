@@ -7,19 +7,19 @@ services:
         #container_name: nginx
         volumes:
             - ${WEBSERVER}/${DIRECTORY}:/usr/share/nginx/html
-            - ${WEBSERVER}/${DIRECTORY}/docker/conf/nginx:/etc/nginx/conf.d:ro
+            - ${WEBSERVER}/${DIRECTORY}/.docker/conf/nginx:/etc/nginx/conf.d:ro
         depends_on: 
             - phpfpm
         ports:
-            - 80:80
+            - 84:80
         networks:
             - packages
           
     phpfpm: 
-        build: docker/conf/fpm
+        build: .docker/conf/fpm
         working_dir: /usr/share/nginx/html
         ports: 
-            - 9000:9000
+            - 9004:9000
         volumes:
             - ${WEBSERVER}/${DIRECTORY}:/usr/share/nginx/html
             - ${WEBSERVER}/${DIRECTORY}/bin/symfony:/usr/bin/symfony
