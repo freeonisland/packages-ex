@@ -1,12 +1,11 @@
 <?php
 
-/*declare(strict_types=1);
+declare(strict_types=1);
 
 ini_set('display_errors','on');
 error_reporting(E_ALL);
 
-define ('APP_ROOT', realpath(__DIR__.'/../'));
-
+/*define ('APP_ROOT', realpath(__DIR__.'/../'));
 require '../src/autoload.php';*/
 
 use App\Kernel;

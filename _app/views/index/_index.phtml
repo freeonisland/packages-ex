@@ -1,0 +1,77 @@
+<div class="page-header">
+    <?php echo $this->getContent(); ?>
+   
+    <form name="create" action="/user/create">
+        Cr: <input type="text" name="login"/>
+        <button type="submit">&nbsp;</button> 
+    </form>
+    
+    <?php if($isLogged) : var_dump($_COOKIE); ?>
+        logged (<a href="/user/logout">x</a>)
+
+        
+    <?php else: ?>
+        <form name="user" action="/user/login">
+            Log:<input type="text" name="login"/>
+            <button type="submit">&nbsp;</button>
+        </form>
+    <?php endif ?>
+
+    <form name="msg" action="/message/create">
+        Msg:<input type="text" name="msg"/>
+        <button type="submit">&nbsp;</button> 
+    </form>
+
+    messages:
+    <ul>
+        <?php foreach($user_messages as $msg) : //id text user time ?>
+            <li>
+                    text: <?= $msg['text'] ?>
+             </li> 
+        <?php endforeach; ?>
+        
+    </ul>
+
+    follow:<ul>
+        <?php foreach($followers as $k_follower => $id) : ?>
+            <li>
+                    <?= $id ?> - <a href="/user/unfollow?id=<?=$id?>">X</a> 
+             </li> 
+        <?php endforeach; ?>
+
+<li> - - - </li>
+        <?php foreach($followed_messages as $msg) : ?>
+            <li>(<?= $msg['id'] ?>)<?= $msg['text'] ?>: <?= $msg['user'] ?></li> 
+        <?php endforeach; ?>
+    </ul>
+
+   
+
+    <hr>
+    <div>Users:</div>
+    <ul>
+        <?php foreach($users as $k_user => $id) : ?>
+            <li>(<?= $id ?>)
+            <?php if($id==$user_id) echo '<b>'; ?>
+                    <?= $k_user ?>
+            <?php if($id==$user_id) echo '</b>'; ?>
+             <a href="/user/delete?id=<?=$id?>">x</a>
+             <?php if($id!=$user_id): ?>
+                - <a href="/user/follow?id=<?=$id?>">F</a> 
+             <?php endif ?>
+             </li> 
+            
+        </form>
+        <?php endforeach; ?>
+    </ul>
+
+    
+    <ul>
+        <?php foreach($all_messages as $msg) : ?>
+            <li>(<?= $msg['id'] ?>)<?= $msg['text'] ?>: <?= $msg['user'] ?></li> 
+            
+        </form>
+        <?php endforeach; ?>
+    </ul>
+    
+</div>

@@ -5,11 +5,12 @@ namespace App\Storage\Ldap\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Ldap\Entity\User;
 use Ldap\Entity\LaminasRepository;
+use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
     /**
-     * 
+     * @Route("/user")
      */
     public function listAction()
     {

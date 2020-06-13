@@ -25,6 +25,9 @@ services:
             - ${WEBSERVER}/${DIRECTORY}/bin/symfony:/usr/bin/symfony
         networks:
             - packages
+
+    #NANOBOX
+    # https://nanobox.io/
     
     # haproxy:
     #     image: haproxy

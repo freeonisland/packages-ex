@@ -14,7 +14,7 @@ class IndexController extends AbstractController
     /**
      * @Route("/")
      */
-    public function index()
+    public function indexAction()
     {
         return new Response(
             'bip2'
