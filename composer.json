@@ -1,10 +1,8 @@
 {
+    "description": "Essai de divers modules packagist.org",
     "type": "project",
     "license": "free",
     "require": {
-        "php": "^7.2",
-        "ext-ctype": "*",
-        "ext-iconv": "*",
         "doctrine/annotations": "1.10",
         "symfony/console": "5.0.*",
         "symfony/dotenv": "5.0.*",
@@ -14,6 +12,13 @@
         "symfony/yaml": "5.0.*"
     },
     "require-dev": {
+        "codeception/codeception": "4.1",
+        "codeception/module-asserts": "1.2",
+        "codeception/module-phpbrowser": "1.0",
+        "friendsofphp/php-cs-fixer": "2.16.4",
+        "fzaninotto/faker": "1.9",
+        "phpmd/phpmd": "2.8",
+        "phpspec/phpspec": "6.2",
         "phpunit/phpunit": "8.5",
         "symfony/maker-bundle": "1.15.*",
         "symfony/phpunit-bridge": "5.0.*"
@@ -59,6 +64,10 @@
         "symfony/symfony": "*"
     },
     "extra": {
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "nunomaduro/phpinsights": "^1.1",
+        "php": "^7.2",
         "symfony": {
             "allow-contrib": false,
             "require": "5.0.*"

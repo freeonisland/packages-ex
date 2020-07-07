@@ -1,22 +1,9 @@
 version: '2.2'
 
 services: 
-    nginx:
-        image: nginx:1.17
-        restart: always
-        #container_name: nginx
-        volumes:
-            - ${WEBSERVER}/${DIRECTORY}:/usr/share/nginx/html
-            - ${WEBSERVER}/${DIRECTORY}/.docker/conf/nginx:/etc/nginx/conf.d:ro
-        depends_on: 
-            - phpfpm
-        ports:
-            - 84:80
-        networks:
-            - packages
-          
     phpfpm: 
-        build: .docker/conf/fpm
+        image: packagesex-phpfpm:latest
+        #build: .docker/Dockerfile/fpm
         working_dir: /usr/share/nginx/html
         ports: 
             - 9004:9000
@@ -26,8 +13,18 @@ services:
         networks:
             - packages
 
-    #NANOBOX
-    # https://nanobox.io/
+    nginx:
+        image: nginx:1.17
+        restart: always
+        volumes:
+            - ${WEBSERVER}/${DIRECTORY}:/usr/share/nginx/html
+            - ${WEBSERVER}/${DIRECTORY}/.docker/conf/nginx:/etc/nginx/conf.d:ro
+        depends_on: 
+            - phpfpm
+        ports:
+            - 84:80
+        networks:
+            - packages
     
     # haproxy:
     #     image: haproxy
@@ -74,6 +71,9 @@ services:
     #     container_name: minio
     #     ports:
     #         - 9999:9000
+
+    #NANOBOX
+    # https://nanobox.io/
     
     #client
     #minio-mc:
