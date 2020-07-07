@@ -11,13 +11,14 @@
   <!--testSuiteLoaderFile="/path/to/StandardTestSuiteLoader.php"-->
 
   <testsuites>
-      <testsuite name="Bundles Test Suite">
+      <testsuite name="Application Test Suite">
           <directory>tests/**</directory>
       </testsuite>
   </testsuites>
   
     <php>
         <server name="KERNEL_CLASS" value="App\Kernel" />
+        <env name="APP_DEBUG" value="false" />
         <ini name="display_errors" value="false"/>
     </php>
 

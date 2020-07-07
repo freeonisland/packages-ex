@@ -134,6 +134,9 @@
     "phpunit/php-file-iterator": {
         "version": "2.0.2"
     },
+    "phpunit/php-invoker": {
+        "version": "3.0.2"
+    },
     "phpunit/php-text-template": {
         "version": "1.2.1"
     },
@@ -174,6 +177,9 @@
     },
     "ralouphie/getallheaders": {
         "version": "3.0.3"
+    },
+    "sebastian/code-unit": {
+        "version": "1.0.5"
     },
     "sebastian/code-unit-reverse-lookup": {
         "version": "1.0.1"
@@ -315,21 +321,6 @@
     },
     "symfony/options-resolver": {
         "version": "v5.0.10"
-    },
-    "symfony/phpunit-bridge": {
-        "version": "4.3",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "4.3",
-            "ref": "6d0e35f749d5f4bfe1f011762875275cd3f9874f"
-        },
-        "files": [
-            ".env.test",
-            "bin/phpunit",
-            "phpunit.xml.dist",
-            "tests/bootstrap.php"
-        ]
     },
     "symfony/polyfill-intl-idn": {
         "version": "v1.15.0"

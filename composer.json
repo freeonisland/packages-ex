@@ -19,11 +19,11 @@
         "fzaninotto/faker": "1.9",
         "phpmd/phpmd": "2.8",
         "phpspec/phpspec": "6.2",
-        "phpunit/phpunit": "8.5",
-        "symfony/maker-bundle": "1.15.*",
-        "symfony/phpunit-bridge": "5.0.*"
+        "phpunit/phpunit": "^9.2",
+        "symfony/maker-bundle": "1.15.*"
     },
     "config": {
+        "bin-dir": "bin",
         "preferred-install": {
             "*": "dist"
         },
@@ -58,7 +58,8 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
+        "test": "phpunit"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -71,6 +72,7 @@
         "symfony": {
             "allow-contrib": false,
             "require": "5.0.*"
-        }
+        },
+        "symfony/phpunit-bridge": "5.0.*"
     }
 }
