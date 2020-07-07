@@ -1,5 +1,0 @@
-packages (sym5,console) -NOSOAP-
-phpext (zend mvc) iterators, swoole, php7
-api (slim,expressive...) rest soap
-frame (phalcon,cake,yii...)
-algo (final recurs)
