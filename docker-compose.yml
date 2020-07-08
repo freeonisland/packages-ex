@@ -31,14 +31,6 @@ services:
     #     volumes:
     #         - ${WEBSERVER}/packages/docker/conf/haproxy/haproxy:/usr/local/etc/haproxy/haproxy.cfg
     
-    # php-oauth-server:
-    #     image: php:fpm
-    #     container_name: php-oauth-server
-    #     ports: 
-    #         - 9008:9000
-    #     volumes:
-    #         - /WEBSERVER/packages:/usr/share/nginx/html
-    
     # mariadb: 
     #     image: mariadb
     #     container_name: mariadb
@@ -49,35 +41,6 @@ services:
     #         MYSQL_ROOT_PASSWORD: example
         # volumes: 
         #     - /WEBSERVER/packages/data:/var/lib/mysql
-    
-    # adminer:
-    #     image: adminer
-    #     container_name: mariadb-adminer
-    #     restart: always
-    #     ports:
-    #         - 8080:8080
-    
-    #     - type: volume
-    #     source: mydata
-    #     target: /data
-    #     volume:
-    #       nocopy: true
-    #   - type: bind
-    #     source: ./static
-    #     target: /opt/app/static
-
-    # minio:
-    #     image: minio/minio
-    #     container_name: minio
-    #     ports:
-    #         - 9999:9000
-
-    #NANOBOX
-    # https://nanobox.io/
-    
-    #client
-    #minio-mc:
-    #    image: minio/mc
     
 networks:
     packages:
