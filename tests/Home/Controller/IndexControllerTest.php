@@ -12,5 +12,6 @@ class IndexControllerTest extends WebTestCase
         $client->request('GET', '/');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertNotEquals(500, $client->getResponse()->getStatusCode());
     }
 }

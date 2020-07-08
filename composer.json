@@ -3,6 +3,7 @@
     "type": "project",
     "license": "free",
     "require": {
+        "php":"^7.2",
         "doctrine/annotations": "1.10",
         "symfony/console": "5.0.*",
         "symfony/dotenv": "5.0.*",
@@ -19,7 +20,7 @@
         "fzaninotto/faker": "1.9",
         "phpmd/phpmd": "2.8",
         "phpspec/phpspec": "6.2",
-        "phpunit/phpunit": "^9.2",
+        "phpunit/phpunit": "8.5",
         "symfony/maker-bundle": "1.15.*"
     },
     "config": {
@@ -59,7 +60,7 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
-        "test": "phpunit"
+        "test": "phpunit --color=always"
     },
     "conflict": {
         "symfony/symfony": "*"
